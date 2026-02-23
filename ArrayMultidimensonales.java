@@ -1,5 +1,3 @@
-package arrays;
-
 /**
  * DESCRIPCIÓN DEL PROBLEMA:
  * Necesito crear un programa que trabaje con una matriz (arreglo bidimensional) de 3x3:
