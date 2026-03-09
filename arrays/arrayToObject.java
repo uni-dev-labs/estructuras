@@ -1,4 +1,6 @@
-import models.Person;
+package arrays;
+
+import arrays.models.Person;
 
 /**
  * DESCRIPCIÓN DEL PROBLEMA:

@@ -1,8 +1,9 @@
-import models.Employer;
+package arrays;
+
+import arrays.models.Employer;
 
 public class ArrayPersons {
     public static void main(String[] args) {
-
         Employer[] employers = new Employer[5];
         loadEmployers(employers);
         // printEmployers(employers);
@@ -30,6 +31,10 @@ public class ArrayPersons {
     }
 
     public static void getTitleForIndex(Employer employer, int index_title) {
+        if (employer == null) {
+            System.out.println("Employer no encontrado (null)");
+            return;
+        }
         System.out.println("Título para el índice " + index_title + ": " + employer.getIndividualTitle(index_title));
         System.out.println("-------------- + ---------------");
     }
