@@ -1,4 +1,4 @@
-package models;
+package arrays.models;
 
 public class Person {
     private String name;

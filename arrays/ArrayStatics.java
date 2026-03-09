@@ -1,3 +1,5 @@
+package arrays;
+
 /**
  * DESCRIPCIÓN DEL PROBLEMA:
  * Necesito crear un programa que me añada 10 elementos en un arreglo estático,
