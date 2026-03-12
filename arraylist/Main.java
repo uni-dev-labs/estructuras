@@ -17,6 +17,8 @@ public class Main {
         ArrayList<Maritimo> transportes_maritimos   = new ArrayList<Maritimo>();
         ArrayList<Aereo>    transportes_aereos      = new ArrayList<Aereo>();
 
+        System.out.println("Hola Mundo");
+
         // // Llenar los arrays de transportes
         llenarTransportesTerrestres(transportes_terrestres);
         llenarTransportesMaritimos(transportes_maritimos);
