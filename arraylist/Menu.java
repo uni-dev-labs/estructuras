@@ -33,15 +33,15 @@ public class Menu {
             switch (opt) {
                 case 1:
                     printTerrestres();
-                    menuGestionar(sc, transportes_terrestres);
+                    menuGestionar(sc, transportes_terrestres, Terrestre.class);
                     break;
                 case 2: 
                     printMaritimos();
-                    menuGestionar(sc, transportes_maritimos);
+                    menuGestionar(sc, transportes_maritimos, Maritimo.class);
                     break;
                 case 3: 
                     printAereos();
-                    menuGestionar(sc, transportes_aereos);
+                    menuGestionar(sc, transportes_aereos, Aereo.class);
                     break;
                 case 0: 
                     System.out.println("Saliendo...");
@@ -54,7 +54,7 @@ public class Menu {
         } while (opt != 0);
     }
 
-    public static <T extends Transporte> void menuGestionar(Scanner sc, ArrayList<T> transportes_type ){
+    public static <T extends Transporte> void menuGestionar(Scanner sc, ArrayList<T> transportes_type, Class<T> clase ){
         int opt;
         T transporte;
         do {
@@ -70,13 +70,13 @@ public class Menu {
             opt = Integer.valueOf(sc.nextLine());
             switch (opt) {
                 case 1: 
-                    transporte = pedirDatosTransporte(sc, transportes_type);
+                    transporte = pedirDatosTransporte(sc, transportes_type, clase);
                     transportes_type.add(transporte);
                     break;
                 case 2:
                     System.out.println("Posicion: ");
                     posicion = Integer.parseInt(sc.nextLine()) - 1;
-                    transporte = pedirDatosTransporte(sc, transportes_type);
+                    transporte = pedirDatosTransporte(sc, transportes_type, clase);
                     modificarObjetoPorPosicion(posicion, transportes_type, transporte);
                     break;
                 case 3: 
@@ -134,13 +134,13 @@ public class Menu {
         }
     }
 
-    public static <T extends Transporte> T pedirDatosTransporte(Scanner sc,ArrayList<T> transportes_type){
+    public static <T extends Transporte> T pedirDatosTransporte(Scanner sc,ArrayList<T> transportes_type, Class<T> clase){
         Transporte transporte;
         System.out.println("Nombre transporte: ");
         String nombre = sc.nextLine();
         System.out.println("Capacidad: ");
         int capacidad = Integer.parseInt(sc.nextLine());
-        if (transportes_type.getFirst() instanceof Aereo) {
+        if ( clase == Aereo.class) {
             String medio = "Aereo";
             System.out.println("Envergadura:");
             double envergadura = Double.parseDouble(sc.nextLine());
@@ -149,7 +149,7 @@ public class Menu {
             transporte = new Aereo(nombre, medio, capacidad, envergadura, altura_max);
             return (T) transporte;
             
-        } else if (transportes_type.getFirst() instanceof Maritimo) {
+        } else if (clase == Maritimo.class) {
             String medio = "Maritimo";
             System.out.println("Eslora:");
             double eslora = Double.parseDouble(sc.nextLine());
