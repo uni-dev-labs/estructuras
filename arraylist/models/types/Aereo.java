@@ -6,6 +6,11 @@ public class Aereo extends Transporte {
     private double envergadura;
     private int altura_max;
 
+    @Override
+    public String toString() {
+        return "Aereo [envergadura=" + envergadura + ", altura_max=" + altura_max + "]";
+    }
+
     public Aereo() {}
 
     public Aereo(String nombre, String medio, int capacidad, double envergadura, int altura_max) {

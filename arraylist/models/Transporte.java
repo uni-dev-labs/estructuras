@@ -5,6 +5,11 @@ public class Transporte {
     private String medio;
     private int capacidad;
     
+    @Override
+    public String toString() {
+        return "Transporte [nombre=" + nombre + ", medio=" + medio + ", capacidad=" + capacidad + "]";
+    }
+
     public Transporte() {}
 
     public Transporte(String nombre, String medio, int capacidad) {

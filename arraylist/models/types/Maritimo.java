@@ -7,6 +7,11 @@ public class Maritimo extends Transporte{
     private double  eslora;
     private int     calado;
     
+    @Override
+    public String toString() {
+        return "Maritimo [eslora=" + eslora + ", calado=" + calado + "]";
+    }
+
     public Maritimo() {}
     
     public Maritimo(String nombre, String medio, int capacidad, double eslora, int calado) {

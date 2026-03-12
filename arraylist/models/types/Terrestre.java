@@ -7,6 +7,11 @@ public class Terrestre extends Transporte {
     private int numero_ruedas;
     private String tipo;
 
+    @Override
+    public String toString() {
+        return "Terrestre [numero_ruedas=" + numero_ruedas + ", tipo=" + tipo + "]";
+    }
+
     public Terrestre() {}
 
     public Terrestre(String nombre, String medio, String tipo, int capacidad, int numero_ruedas) {
