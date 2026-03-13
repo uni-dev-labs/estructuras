@@ -59,72 +59,8 @@ public class Main {
         // System.out.println("Transporte: " + transporte.getNombre() + " - " +
         // transporte.getMedio());
         // }
-    }
 
-    public static void crearTransporte(
-            Scanner scanner,
-            ArrayList<Terrestre> terrestres,
-            ArrayList<Maritimo> maritimos,
-            ArrayList<Aereo> aereos) {
-
-        System.out.println("Seleccione tipo de transporte:");
-        System.out.println("1. Terrestre");
-        System.out.println("2. Maritimo");
-        System.out.println("3. Aereo");
-
-        int tipo = scanner.nextInt();
-
-        System.out.print("Nombre: ");
-        String nombre = scanner.next();
-
-        System.out.print("Medio: ");
-        String medio = scanner.next();
-
-        System.out.print("Capacidad: ");
-        int capacidad = scanner.nextInt();
-
-        switch (tipo) {
-
-            case 1:
-
-                System.out.print("Tipo de via: ");
-                String via = scanner.next();
-
-                System.out.print("Numero de ruedas: ");
-                int ruedas = scanner.nextInt();
-
-                terrestres.add(new Terrestre(nombre, medio, via, capacidad, ruedas));
-
-                break;
-
-            case 2:
-
-                System.out.print("Tonelaje: ");
-                int tonelaje = scanner.nextInt();
-
-                System.out.print("Tripulacion: ");
-                int tripulacion = scanner.nextInt();
-
-                maritimos.add(new Maritimo(nombre, medio, capacidad, tonelaje, tripulacion));
-
-                break;
-
-            case 3:
-
-                System.out.print("Altitud maxima: ");
-                int altitud = scanner.nextInt();
-
-                System.out.print("Numero de motores: ");
-                int motores = scanner.nextInt();
-
-                aereos.add(new Aereo(nombre, medio, capacidad, altitud, motores));
-
-                break;
-
-            default:
-                System.out.println("Tipo invalido");
-
-        }
+        Menu.iniciarMenu();
 
     }
 
@@ -213,6 +149,67 @@ public class Main {
     public static <T extends Transporte> void eliminarObjetoPorPosicion(int posicion, ArrayList<T> transportes_type) {
         System.out.println("Eliminando el objeto en la posición " + posicion);
         transportes_type.remove(posicion);
+    }
+
+    public static void crearTransporte(
+            Scanner scanner,
+            ArrayList<Terrestre> terrestres,
+            ArrayList<Maritimo> maritimos,
+            ArrayList<Aereo> aereos) {
+
+        System.out.println("Seleccione tipo de transporte:");
+        System.out.println("1. Terrestre");
+        System.out.println("2. Maritimo");
+        System.out.println("3. Aereo");
+
+        int tipo = scanner.nextInt();
+
+        System.out.print("Nombre: ");
+        String nombre = scanner.next();
+
+        System.out.print("Medio: ");
+        String medio = scanner.next();
+
+        System.out.print("Capacidad: ");
+        int capacidad = scanner.nextInt();
+
+        switch (tipo) {
+
+            case 1:
+                System.out.print("Tipo de via: ");
+                String via = scanner.next();
+
+                System.out.print("Numero de ruedas: ");
+                int ruedas = scanner.nextInt();
+
+                terrestres.add(new Terrestre(nombre, medio, via, capacidad, ruedas));
+                break;
+
+            case 2:
+                System.out.print("Tonelaje: ");
+                int tonelaje = scanner.nextInt();
+
+                System.out.print("Tripulacion: ");
+                int tripulacion = scanner.nextInt();
+
+                maritimos.add(new Maritimo(nombre, medio, capacidad, tonelaje, tripulacion));
+                break;
+
+            case 3:
+                System.out.print("Altitud maxima: ");
+                int altitud = scanner.nextInt();
+
+                System.out.print("Numero de motores: ");
+                int motores = scanner.nextInt();
+
+                aereos.add(new Aereo(nombre, medio, capacidad, altitud, motores));
+                break;
+
+            default:
+                System.out.println("Tipo invalido");
+
+        }
+
     }
 
 }

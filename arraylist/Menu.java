@@ -10,155 +10,219 @@ import arraylist.models.types.Terrestre;
 
 public class Menu {
 
-    public void printMenu() {
+    static ArrayList<Transporte> listaTransportes = new ArrayList<>();
+
+    public static void iniciarMenu() {
 
         Scanner sc = new Scanner(System.in);
-
-        ArrayList<Terrestre> transportes_terrestres = new ArrayList<>();
-        ArrayList<Maritimo> transportes_maritimos = new ArrayList<>();
-        ArrayList<Aereo> transportes_aereos = new ArrayList<>();
-
-        int option;
+        int opcionUsuario;
 
         do {
 
-            System.out.println("\n========= MENU =========");
-            System.out.println("1. Mostrar transportes terrestres");
-            System.out.println("2. Mostrar transportes maritimos");
-            System.out.println("3. Mostrar transportes aereos");
-            System.out.println("4. Añadir transporte");
-            System.out.println("5. Obtener tamaño");
-            System.out.println("6. Obtener transporte por posicion");
-            System.out.println("7. Eliminar transporte por posicion");
-            System.out.println("8. Salir");
-            System.out.print("Seleccione una opcion: ");
+            System.out.println();
+            System.out.println("===== SISTEMA DE TRANSPORTES =====");
+            System.out.println("1. Registrar transporte");
+            System.out.println("2. Ver lista de transportes");
+            System.out.println("3. Editar transporte");
+            System.out.println("4. Borrar transporte");
+            System.out.println("0. Cerrar programa");
+            System.out.println();
 
-            option = sc.nextInt();
+            opcionUsuario = sc.nextInt();
+            sc.nextLine();
 
-            switch (option) {
+            switch (opcionUsuario) {
 
                 case 1:
-                    Main.printTransportesTerrestres(transportes_terrestres);
+                    registrarTransporte(sc);
                     break;
 
                 case 2:
-                    Main.printTransportesMaritimos(transportes_maritimos);
+                    listarTransportes();
                     break;
 
                 case 3:
-                    Main.printTransportesAereos(transportes_aereos);
+                    modificarTransporte(sc);
                     break;
 
                 case 4:
-                    Main.crearTransporte(sc, transportes_terrestres, transportes_maritimos, transportes_aereos);
+                    borrarTransporte(sc);
                     break;
 
-                case 5:
-
-                    System.out.println("Seleccione tipo:");
-                    System.out.println("1 Terrestre");
-                    System.out.println("2 Maritimo");
-                    System.out.println("3 Aereo");
-
-                    int tipo = sc.nextInt();
-
-                    switch (tipo) {
-
-                        case 1:
-                            Main.obtenerTamañoDelArrayList(transportes_terrestres);
-                            break;
-
-                        case 2:
-                            Main.obtenerTamañoDelArrayList(transportes_maritimos);
-                            break;
-
-                        case 3:
-                            Main.obtenerTamañoDelArrayList(transportes_aereos);
-                            break;
-
-                        default:
-                            System.out.println("Tipo invalido");
-                    }
-
-                    break;
-
-                case 6:
-
-                    System.out.println("Seleccione tipo:");
-                    System.out.println("1 Terrestre");
-                    System.out.println("2 Maritimo");
-                    System.out.println("3 Aereo");
-
-                    int tipo2 = sc.nextInt();
-
-                    System.out.println("Ingrese posicion:");
-                    int pos = sc.nextInt();
-
-                    switch (tipo2) {
-
-                        case 1:
-                            Main.obtenerObjetoPorPosicion(pos, transportes_terrestres);
-                            break;
-
-                        case 2:
-                            Main.obtenerObjetoPorPosicion(pos, transportes_maritimos);
-                            break;
-
-                        case 3:
-                            Main.obtenerObjetoPorPosicion(pos, transportes_aereos);
-                            break;
-
-                        default:
-                            System.out.println("Tipo invalido");
-                    }
-
-                    break;
-
-                case 7:
-
-                    System.out.println("Seleccione tipo:");
-                    System.out.println("1 Terrestre");
-                    System.out.println("2 Maritimo");
-                    System.out.println("3 Aereo");
-
-                    int tipo3 = sc.nextInt();
-
-                    System.out.println("Ingrese posicion a eliminar:");
-                    int eliminar = sc.nextInt();
-
-                    switch (tipo3) {
-
-                        case 1:
-                            Main.eliminarObjetoPorPosicion(eliminar, transportes_terrestres);
-                            break;
-
-                        case 2:
-                            Main.eliminarObjetoPorPosicion(eliminar, transportes_maritimos);
-                            break;
-
-                        case 3:
-                            Main.eliminarObjetoPorPosicion(eliminar, transportes_aereos);
-                            break;
-
-                        default:
-                            System.out.println("Tipo invalido");
-                    }
-
-                    break;
-
-                case 8:
-                    System.out.println("Saliendo...");
+                case 0:
+                    System.out.println("Saliendo ...");
                     break;
 
                 default:
-                    System.out.println("Opcion invalida");
-
+                    System.out.println("La opcion ingresada no es valida.");
             }
 
-        } while (option != 8);
+        } while (opcionUsuario != 0);
 
         sc.close();
-
     }
 
+    public static void registrarTransporte(Scanner sc) {
+
+        System.out.println("Seleccione el tipo de transporte que desea crear:");
+        System.out.println("1. Transporte terrestre");
+        System.out.println("2. Transporte marítimo");
+        System.out.println("3. Transporte aéreo");
+        System.out.println();
+
+        int tipoSeleccionado = sc.nextInt();
+        sc.nextLine();
+
+        System.out.println("Ingrese el nombre:");
+        String nombreTransporte = sc.nextLine();
+
+        System.out.println("Ingrese la capacidad:");
+        int capacidadTransporte = sc.nextInt();
+        sc.nextLine();
+
+        switch (tipoSeleccionado) {
+
+            case 1:
+                System.out.println("Tipo de vía:");
+                String tipoVia = sc.nextLine();
+
+                System.out.println("Cantidad de ruedas:");
+                int ruedas = sc.nextInt();
+
+                Transporte t1 = new Terrestre(nombreTransporte, "Terrestre", tipoVia, capacidadTransporte, ruedas);
+                listaTransportes.add(t1);
+                break;
+
+            case 2:
+                System.out.println("Ingrese la eslora:");
+                double longitud = sc.nextDouble();
+
+                System.out.println("Ingrese el calado:");
+                int profundidad = sc.nextInt();
+
+                Transporte t2 = new Maritimo(nombreTransporte, "Maritimo", capacidadTransporte, longitud, profundidad);
+                listaTransportes.add(t2);
+                break;
+
+            case 3:
+                System.out.println("Ingrese la envergadura:");
+                double ala = sc.nextDouble();
+
+                System.out.println("Ingrese la altura máxima:");
+                int alturaMax = sc.nextInt();
+
+                Transporte t3 = new Aereo(nombreTransporte, "Aereo", capacidadTransporte, ala, alturaMax);
+                listaTransportes.add(t3);
+                break;
+
+            default:
+                System.out.println("Tipo de transporte no válido.");
+                return;
+        }
+
+        System.out.println("El transporte fue registrado correctamente.");
+        System.out.println();
+    }
+
+    public static void listarTransportes() {
+
+        System.out.println("--- Transportes registrados ---");
+
+        for (int i = 0; i < listaTransportes.size(); i++) {
+
+            Transporte t = listaTransportes.get(i);
+
+            System.out.println("Registro " + (i + 1) + ": Nombre = " + t.getNombre() + ", Medio = " + t.getMedio()
+                    + ", Capacidad = " + t.getCapacidad());
+        }
+
+        System.out.println();
+    }
+
+    public static void modificarTransporte(Scanner sc) {
+
+        listarTransportes();
+
+        System.out.println("Digite el número del transporte que desea modificar:");
+        int indice = sc.nextInt();
+        sc.nextLine();
+
+        if (indice < 0 & indice >= listaTransportes.size()) {
+            System.out.println("No existe transporte en esa posición.");
+            return;
+        }
+
+        Transporte transporteEditar = listaTransportes.get(indice);
+
+        if (transporteEditar instanceof Terrestre terrestreEdit) {
+
+            System.out.println("Ingrese el nuevo nombre:");
+            String nombre = sc.nextLine();
+            terrestreEdit.setNombre(nombre);
+
+            System.out.println("Ingrese la nueva capacidad:");
+            int capacidad = sc.nextInt();
+            terrestreEdit.setCapacidad(capacidad);
+
+            System.out.println("Ingrese el nuevo número de ruedas:");
+            int ruedas = sc.nextInt();
+            terrestreEdit.setNumero_ruedas(ruedas);
+
+            System.out.println("Ingrese el nuevo tipo de vía:");
+            String via = sc.nextLine();
+            terrestreEdit.setTipo(via);
+
+        } else if (transporteEditar instanceof Maritimo maritimoEdit) {
+
+            System.out.println("Ingrese el nuevo nombre:");
+            String nombre = sc.nextLine();
+            maritimoEdit.setNombre(nombre);
+
+            System.out.println("Ingrese la nueva capacidad:");
+            int capacidad = sc.nextInt();
+            maritimoEdit.setCapacidad(capacidad);
+
+            System.out.println("Ingrese la nueva eslora:");
+            double eslora = sc.nextDouble();
+            maritimoEdit.setEslora(eslora);
+
+            System.out.println("Ingrese el nuevo calado:");
+            int calado = sc.nextInt();
+            maritimoEdit.setCalado(calado);
+
+        } else if (transporteEditar instanceof Aereo aereoEdit) {
+
+            System.out.println("Ingrese el nuevo nombre:");
+            String nombre = sc.nextLine();
+            aereoEdit.setNombre(nombre);
+
+            System.out.println("Ingrese la nueva capacidad:");
+            int capacidad = sc.nextInt();
+            aereoEdit.setCapacidad(capacidad);
+
+            System.out.println("Ingrese la nueva envergadura:");
+            double envergadura = sc.nextDouble();
+            aereoEdit.setEnvergadura(envergadura);
+        }
+
+        System.out.println("Los datos del transporte fueron actualizados.");
+    }
+
+    public static void borrarTransporte(Scanner sc) {
+
+        listarTransportes();
+
+        System.out.println("Digite el número del transporte que desea eliminar:");
+        int indice = sc.nextInt();
+
+        if (indice < 0 & indice > listaTransportes.size()) {
+            System.out.println("Número fuera de rango.");
+            return;
+        }
+
+        listaTransportes.remove(indice - 1);
+
+        System.out.println("El transporte fue eliminado correctamente.");
+        System.out.println();
+    }
 }
