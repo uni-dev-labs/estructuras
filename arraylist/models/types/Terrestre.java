@@ -7,7 +7,7 @@ public class Terrestre extends Transporte {
     private int numero_ruedas;
     private String tipo;
 
-    public Terrestre() {}
+    public Terrestre(String nombre, int capacidad, String via, int ruedas) {}
 
     public Terrestre(String nombre, String medio, String tipo, int capacidad, int numero_ruedas) {
         super(nombre, medio, capacidad);
