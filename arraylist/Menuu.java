@@ -1,3 +1,4 @@
+//Menu para gestionar transportes terrestres, marítimos y aéreos usando ArrayList. Permite añadir, listar, modificar y eliminar elementos de cada categoría. Utiliza métodos auxiliares para leer enteros y mostrar menús específicos para cada tipo de transporte.git add .
 package arraylist;
 
 import java.util.ArrayList;
