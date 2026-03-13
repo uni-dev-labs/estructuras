@@ -6,6 +6,7 @@ import java.util.Scanner;
 import arraylist.models.types.Aereo;
 import arraylist.models.types.Maritimo;
 import arraylist.models.types.Terrestre;
+
 //Me merezco un 5 mi profe, yo veré :)))
 public class Menu {
 
@@ -42,11 +43,11 @@ public class Menu {
                     break;
 
                 case 3:
-                    actualizarTransporte(aereos);
+                    actualizarTransporte(terrestres, maritimos, aereos);
                     break;
 
                 case 4:
-                    eliminarTransporte(aereos);
+                    eliminarTransporte(terrestres, maritimos, aereos);
                     break;
 
                 case 5:
@@ -137,28 +138,91 @@ public class Menu {
 
     }
 
-    public void actualizarTransporte(ArrayList<Aereo> aereos) {
+    public void actualizarTransporte(ArrayList<Terrestre> terrestres,
+            ArrayList<Maritimo> maritimos,
+            ArrayList<Aereo> aereos) {
+
+        System.out.println("Tipo de transporte a actualizar:");
+        System.out.println("1. Terrestre");
+        System.out.println("2. Maritimo");
+        System.out.println("3. Aereo");
+
+        int tipo = sc.nextInt();
+        sc.nextLine();
 
         System.out.println("Posicion a modificar:");
         int pos = sc.nextInt();
-
         sc.nextLine();
 
         System.out.println("Nuevo nombre:");
         String nombre = sc.nextLine();
 
-        Aereo nuevo = new Aereo(nombre, "Aereo", 3000, 30, 3);
+        System.out.println("Nueva capacidad:");
+        int capacidad = sc.nextInt();
+        sc.nextLine();
 
-        Main.ModificarObjetoPorPosicion(pos, aereos, nuevo);
+        if (tipo == 1) {
+            System.out.println("Tipo de via:");
+            String via = sc.nextLine();
+
+            System.out.println("Numero de ruedas:");
+            int ruedas = sc.nextInt();
+
+            Terrestre nuevo = new Terrestre(nombre, "Terrestre", via, capacidad, ruedas);
+            Main.ModificarObjetoPorPosicion(pos, terrestres, nuevo);
+        }
+
+        if (tipo == 2) {
+            System.out.println("Eslora:");
+            int eslora = sc.nextInt();
+
+            System.out.println("Tripulacion:");
+            int trip = sc.nextInt();
+
+            Maritimo nuevo = new Maritimo(nombre, "Maritimo", capacidad, eslora, trip);
+            Main.ModificarObjetoPorPosicion(pos, maritimos, nuevo);
+        }
+
+        if (tipo == 3) {
+            System.out.println("Envergadura:");
+            double env = sc.nextDouble();
+
+            System.out.println("Altura maxima:");
+            int alt = sc.nextInt();
+
+            Aereo nuevo = new Aereo(nombre, "Aereo", capacidad, env, alt);
+            Main.ModificarObjetoPorPosicion(pos, aereos, nuevo);
+        }
 
     }
 
-    public void eliminarTransporte(ArrayList<Aereo> aereos) {
+    public void eliminarTransporte(ArrayList<Terrestre> terrestres,
+            ArrayList<Maritimo> maritimos,
+            ArrayList<Aereo> aereos) {
+
+        System.out.println("Tipo de transporte a eliminar:");
+        System.out.println("1. Terrestre");
+        System.out.println("2. Maritimo");
+        System.out.println("3. Aereo");
+
+        int tipo = sc.nextInt();
+        sc.nextLine();
 
         System.out.println("Posicion a eliminar:");
         int pos = sc.nextInt();
+        sc.nextLine();
 
-        Main.eliminarObjetoPorPosicion(pos, aereos);
+        if (tipo == 1) {
+            Main.eliminarObjetoPorPosicion(pos, terrestres);
+        }
+
+        if (tipo == 2) {
+            Main.eliminarObjetoPorPosicion(pos, maritimos);
+        }
+
+        if (tipo == 3) {
+            Main.eliminarObjetoPorPosicion(pos, aereos);
+        }
 
     }
 
