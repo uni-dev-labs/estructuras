@@ -11,18 +11,19 @@ import arraylist.models.types.Terrestre;
 public class Menu {
 
     static Scanner sc = new Scanner(System.in);
-    static ArrayList<Transporte> transportes = new ArrayList<>();
+    public static ArrayList<Transporte> transportes = new ArrayList<>();
 
-    public static void main(String[] args) {
+    public static void iniciarMenu() {
 
         int opcion;
 
         do {
             System.out.println("\n===== MENU CRUD TRANSPORTES =====");
             System.out.println("1. Añadir transporte");
-            System.out.println("2. Mostrar transportes");
-            System.out.println("3. Actualizar transporte");
-            System.out.println("4. Eliminar transporte");
+            System.out.println("2. Buscar transporte");
+            System.out.println("3. Mostrar transportes");
+            System.out.println("4. Actualizar transporte");
+            System.out.println("5. Eliminar transporte");
             System.out.println("0. Salir");
             System.out.print("Seleccione una opción: ");
 
@@ -33,12 +34,15 @@ public class Menu {
                     añadir();
                     break;
                 case 2:
-                    leer();
+                    buscar();
                     break;
                 case 3:
-                    actualizar();
+                    leer();
                     break;
                 case 4:
+                    actualizar();
+                    break;
+                case 5:
                     eliminar();
                     break;
                 case 0:
@@ -53,7 +57,6 @@ public class Menu {
         sc.close();
     }
 
-    // MÉTODO PARA AÑADIR TRANSPORTE
     public static void añadir() {
         System.out.println("\nTipo de transporte:");
         System.out.println("1. Terrestre");
@@ -102,7 +105,31 @@ public class Menu {
         System.out.println("Transporte agregado correctamente.");
     }
 
-    // MÉTODO PARA LEER TRANSPORTES
+    public static void buscar() {
+        if (transportes.isEmpty()) {
+            System.out.println("No hay transportes registrados");
+            return;
+        }
+
+        System.out.print("Ingrese nombre a buscar: ");
+        String nombre = sc.nextLine();
+
+        boolean encontrado = false;
+
+        for (Transporte t : transportes) {
+            if (t.getNombre().equalsIgnoreCase(nombre)) {
+                System.out.println("Encontrado: " + t.getNombre() +
+                        " | Medio: " + t.getMedio() +
+                        " | Capacidad: " + t.getCapacidad());
+                encontrado = true;
+            }
+        }
+
+        if (!encontrado) {
+            System.out.println("No se encontró el transporte.");
+        }
+    }
+
     public static void leer() {
         if (transportes.isEmpty()) {
             System.out.println("No hay transportes registrados");
@@ -113,22 +140,25 @@ public class Menu {
         for (int i = 0; i < transportes.size(); i++) {
             Transporte t = transportes.get(i);
 
-            String info = i + " - Nombre: " + t.getNombre() + " | Medio: " + t.getMedio() +
-                          " | Capacidad: " + t.getCapacidad();
+            String info = i + " - Nombre: " + t.getNombre() +
+                    " | Medio: " + t.getMedio() +
+                    " | Capacidad: " + t.getCapacidad();
 
             if (t instanceof Terrestre terrestre) {
-                info += " | Tipo vía: " + terrestre.getTipo() + " | Ruedas: " + terrestre.getNumero_ruedas();
+                info += " | Tipo vía: " + terrestre.getTipo() +
+                        " | Ruedas: " + terrestre.getNumero_ruedas();
             } else if (t instanceof Maritimo maritimo) {
-                info += " | Eslora: " + maritimo.getEslora() + " | Calado: " + maritimo.getCalado();
+                info += " | Eslora: " + maritimo.getEslora() +
+                        " | Calado: " + maritimo.getCalado();
             } else if (t instanceof Aereo aereo) {
-                info += " | Envergadura: " + aereo.getEnvergadura() + " | Altura: " + aereo.getAltura_max();
+                info += " | Envergadura: " + aereo.getEnvergadura() +
+                        " | Altura: " + aereo.getAltura_max();
             }
 
             System.out.println(info);
         }
     }
 
-    // MÉTODO PARA ACTUALIZAR TRANSPORTE
     public static void actualizar() {
         leer();
         if (transportes.isEmpty()) return;
@@ -152,24 +182,28 @@ public class Menu {
         if (t instanceof Terrestre terrestre) {
             System.out.print("Nuevo tipo de vía: ");
             terrestre.setTipo(sc.nextLine());
+
             System.out.print("Nuevo número de ruedas: ");
             terrestre.setNumero_ruedas(leerEntero());
+
         } else if (t instanceof Maritimo maritimo) {
             System.out.print("Nueva eslora: ");
             maritimo.setEslora(leerDouble());
+
             System.out.print("Nuevo calado: ");
             maritimo.setCalado(leerEntero());
+
         } else if (t instanceof Aereo aereo) {
             System.out.print("Nueva envergadura: ");
             aereo.setEnvergadura(leerDouble());
+
             System.out.print("Nueva altura máxima: ");
-            aereo.setAltura(leerEntero());
+            aereo.setAltura_max(leerEntero()); // 🔥 CORREGIDO
         }
 
         System.out.println("Transporte actualizado correctamente.");
     }
 
-    // MÉTODO PARA ELIMINAR TRANSPORTE
     public static void eliminar() {
         leer();
         if (transportes.isEmpty()) return;
@@ -186,7 +220,6 @@ public class Menu {
         System.out.println("Transporte eliminado correctamente.");
     }
 
-    // MÉTODOS AUXILIARES PARA LEER NÚMEROS DE FORMA SEGURA
     public static int leerEntero() {
         while (true) {
             try {
@@ -205,9 +238,5 @@ public class Menu {
                 System.out.print("Entrada inválida. Ingrese un número decimal: ");
             }
         }
-    }
-
-    public static void iniciarMenu() {
-        
     }
 }
