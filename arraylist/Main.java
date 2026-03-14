@@ -3,6 +3,7 @@ package arraylist;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import arraylist.models.Menu;
 import arraylist.models.Transporte;
 import arraylist.models.types.Aereo;
 import arraylist.models.types.Maritimo;
@@ -10,56 +11,17 @@ import arraylist.models.types.Terrestre;
 
 public class Main {
 
-   
-
     public static void main(String[] args) {
-        // Crear los arrays de transportes
-        ArrayList<Terrestre> transportes_terrestres = new ArrayList<Terrestre>();
-        ArrayList<Maritimo> transportes_maritimos = new ArrayList<Maritimo>();
-        ArrayList<Aereo> transportes_aereos = new ArrayList<Aereo>();
+       
+        ArrayList<Terrestre> transportes_terrestres = new ArrayList<>();
+        ArrayList<Maritimo> transportes_maritimos = new ArrayList<>();
+        ArrayList<Aereo> transportes_aereos = new ArrayList<>();
 
-        // // Llenar los arrays de transportes
         llenarTransportesTerrestres(transportes_terrestres);
         llenarTransportesMaritimos(transportes_maritimos);
         llenarTransportesAereos(transportes_aereos);
 
-        // Imprimir los arrays de transportes
-        printTransportesTerrestres(transportes_terrestres);
-        printTransportesMaritimos(transportes_maritimos);
-        printTransportesAereos(transportes_aereos);
-
-        // Añadir un nuevo transporte terrestre en la posición 2
-        añadirNuevoTransporte(2, transportes_terrestres, new Terrestre("Bicicleta", "Terrestre", "carretera", 2, 2));
-        printTransportesTerrestres(transportes_terrestres);
-
-        // Obtener el tamaño del ArrayList de transportes terrestres
-        obtenerTamañoDelArrayList(transportes_terrestres);
-
-        // Obtener el objeto por posición
-        obtenerObjetoPorPosicion(2, transportes_terrestres);
-
-        // Obtener el objeto por nombre
-        final Aereo transporte_uno = obtenerObjetoPorNombre("Aereo", transportes_aereos);
-        if (transporte_uno != null)
-            System.out.println("Transporte terrestre: " + transporte_uno.getNombre());
-
-        // // Modificar el objeto por posición
-        ModificarObjetoPorPosicion(2, transportes_aereos, new Aereo("Drone dos . 0", "Aereo", 3000, 30, 3));
-        printTransportesAereos(transportes_aereos);
-
-        // // Eliminar el objeto por posición
-        eliminarObjetoPorPosicion(2, transportes_aereos);
-        printTransportesAereos(transportes_aereos);
-
-        // ArrayList<Transporte> transportes = new ArrayList<Transporte>();
-        // transportes.addAll(transportes_terrestres);
-        // transportes.addAll(transportes_maritimos);
-        // transportes.addAll(transportes_aereos);
-
-        // for(Transporte transporte : transportes) {
-        // System.out.println("Transporte: " + transporte.getNombre() + " - " +
-        // transporte.getMedio());
-        // }
+        Menu.runMenu(transportes_terrestres, transportes_maritimos, transportes_aereos);
 
     }
 
@@ -137,6 +99,7 @@ public class Main {
             System.out.println("Error: " + e.getMessage());
             return null;
         }
+
     }
 
     public static <T extends Transporte> void ModificarObjetoPorPosicion(int posicion, ArrayList<T> transportes_type,
