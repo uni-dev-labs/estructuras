@@ -19,7 +19,7 @@ public class Menu {
 
         do {
             System.out.println();
-            System.out.println("-----MENU-----");
+            System.out.println("-----MENU----- ");
             System.out.println("1. Crear transporte");
             System.out.println("2. Mostrar transportes");
             System.out.println("3. Actualizar transporte");
