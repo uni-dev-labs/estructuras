@@ -63,7 +63,8 @@ public class Main {
         // for(Transporte transporte : transportes) {
         //     System.out.println("Transporte: " + transporte.getNombre() + " - " + transporte.getMedio());
         // }
-
+        System.out.print("\033[H\033[2J");
+        Menu.menu();
     }
 
 
