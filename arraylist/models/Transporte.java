@@ -31,4 +31,13 @@ public class Transporte {
     public void setCapacidad(int capacidad) {
         this.capacidad = capacidad;
     }
+
+    @Override
+    public String toString() {
+        return "Transporte{" +
+                "nombre='" + nombre + '\'' +
+                ", medio='" + medio + '\'' +
+                ", capacidad=" + capacidad +
+                '}';
+    }
 }
