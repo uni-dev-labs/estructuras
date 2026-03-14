@@ -9,13 +9,12 @@ import arraylist.models.types.Terrestre;
 
 public class Main {
 
-    
-
     public static void main(String[] args) {
+
         // Crear los arrays de transportes
         ArrayList<Terrestre> transportes_terrestres = new ArrayList<Terrestre>();
-        ArrayList<Maritimo> transportes_maritimos   = new ArrayList<Maritimo>();
-        ArrayList<Aereo>    transportes_aereos      = new ArrayList<Aereo>();
+        ArrayList<Maritimo> transportes_maritimos = new ArrayList<Maritimo>();
+        ArrayList<Aereo> transportes_aereos = new ArrayList<Aereo>();
 
         // // Llenar los arrays de transportes
         llenarTransportesTerrestres(transportes_terrestres);
@@ -31,7 +30,6 @@ public class Main {
         añadirNuevoTransporte(2, transportes_terrestres, new Terrestre("Bicicleta", "Terrestre", "carretera", 2, 2));
         printTransportesTerrestres(transportes_terrestres);
 
-
         // Obtener el tamaño del ArrayList de transportes terrestres
         obtenerTamañoDelArrayList(transportes_terrestres);
 
@@ -40,9 +38,8 @@ public class Main {
 
         // Obtener el objeto por nombre
         final Aereo transporte_uno = obtenerObjetoPorNombre("Aereo", transportes_aereos);
-        if(transporte_uno != null) 
+        if (transporte_uno != null)
             System.out.println("Transporte terrestre: " + transporte_uno.getNombre());
-
 
         // // Modificar el objeto por posición
         ModificarObjetoPorPosicion(2, transportes_aereos, new Aereo("Drone dos . 0", "Aereo", 3000, 30, 3));
@@ -52,20 +49,19 @@ public class Main {
         eliminarObjetoPorPosicion(2, transportes_aereos);
         printTransportesAereos(transportes_aereos);
 
-
-
         // ArrayList<Transporte> transportes = new ArrayList<Transporte>();
         // transportes.addAll(transportes_terrestres);
         // transportes.addAll(transportes_maritimos);
         // transportes.addAll(transportes_aereos);
-        
 
         // for(Transporte transporte : transportes) {
-        //     System.out.println("Transporte: " + transporte.getNombre() + " - " + transporte.getMedio());
+        // System.out.println("Transporte: " + transporte.getNombre() + " - " +
+        // transporte.getMedio());
         // }
 
-    }
+        Menu.iniciarMenu();
 
+    }
 
     public static void llenarTransportesTerrestres(ArrayList<Terrestre> transportes_terrestres) {
         transportes_terrestres.add(new Terrestre("Tren", "Terrestre", "rieles", 30000, 0));
@@ -73,7 +69,7 @@ public class Main {
         transportes_terrestres.add(new Terrestre("automovil", "Terrestre", "carretera", 5, 4));
         transportes_terrestres.add(new Terrestre("motocicleta", "Terrestre", "carretera", 2, 2));
     }
-    
+
     public static void llenarTransportesMaritimos(ArrayList<Maritimo> transportes_maritimos) {
         transportes_maritimos.add(new Maritimo("Barco", "Maritimo", 10000, 100, 10));
         transportes_maritimos.add(new Maritimo("Yate", "Maritimo", 5000, 50, 5));
@@ -91,16 +87,16 @@ public class Main {
         System.out.println("*****************TERRESTRES********************");
         System.out.println("==============================================");
 
-        for(Terrestre terrestre : transportes_terrestres) {
+        for (Terrestre terrestre : transportes_terrestres) {
             System.out.println("Transportes Terrestres: " + terrestre.getNombre() + " - " + terrestre.getMedio());
         }
     }
-        
+
     public static void printTransportesMaritimos(ArrayList<Maritimo> transportes_maritimos) {
         System.out.println("*****************MARITIMOS********************");
         System.out.println("==============================================");
 
-        for(Maritimo maritimo : transportes_maritimos) {
+        for (Maritimo maritimo : transportes_maritimos) {
             System.out.println("Transportes Maritimos: " + maritimo.getNombre() + " - " + maritimo.getMedio());
         }
     }
@@ -109,11 +105,10 @@ public class Main {
         System.out.println("*****************AEREOS********************");
         System.out.println("==============================================");
 
-        for(Aereo aereo : transportes_aereos) {
+        for (Aereo aereo : transportes_aereos) {
             System.out.println("Transportes Aereos: " + aereo.getNombre() + " - " + aereo.getMedio());
         }
     }
-
 
     public static <T> void añadirNuevoTransporte(int posicion, ArrayList<T> transportes_type, T transporte) {
         System.out.println("Añadiendo un nuevo transporte en la posición " + posicion);
@@ -125,15 +120,15 @@ public class Main {
     }
 
     public static <T extends Transporte> void obtenerObjetoPorPosicion(int posicion, ArrayList<T> transportes_type) {
-        System.out.println("Objeto en la posición " + posicion + " la instancia del objeto en memoria: " + transportes_type.get(posicion));
+        System.out.println("Objeto en la posición " + posicion + " la instancia del objeto en memoria: "
+                + transportes_type.get(posicion));
         System.out.println("Objeto en la posición " + posicion + ": " + transportes_type.get(posicion).getCapacidad());
     }
 
-
     public static <T extends Transporte> T obtenerObjetoPorNombre(String nombre, ArrayList<T> transportes_type) {
         try {
-            for(T transporte : transportes_type) {
-                if(transporte.getNombre().equals(nombre)) {
+            for (T transporte : transportes_type) {
+                if (transporte.getNombre().equals(nombre)) {
                     return transporte;
                 }
             }
@@ -143,8 +138,9 @@ public class Main {
             return null;
         }
     }
-    
-    public static <T extends Transporte> void ModificarObjetoPorPosicion(int posicion, ArrayList<T> transportes_type, T transporte) {
+
+    public static <T extends Transporte> void ModificarObjetoPorPosicion(int posicion, ArrayList<T> transportes_type,
+            T transporte) {
         System.out.println("Modificando el objeto en la posición " + posicion);
         transportes_type.set(posicion, transporte);
     }
@@ -153,5 +149,5 @@ public class Main {
         System.out.println("Eliminando el objeto en la posición " + posicion);
         transportes_type.remove(posicion);
     }
-}
 
+}
