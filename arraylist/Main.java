@@ -19,8 +19,6 @@ public class Main {
         llenarTransportesMaritimos(transportes_maritimos);
         llenarTransportesAereos(transportes_aereos);
 
-        Menu.mostrarMenu(transportes_terrestres, transportes_maritimos, transportes_aereos);
-
         printTransportesTerrestres(transportes_terrestres);
         printTransportesMaritimos(transportes_maritimos);
         printTransportesAereos(transportes_aereos);
@@ -43,12 +41,10 @@ public class Main {
         transportes_terrestres.add(new Terrestre("automovil", "Terrestre", "carretera", 5, 4));
         transportes_terrestres.add(new Terrestre("motocicleta", "Terrestre", "carretera", 2, 2));
     }
-
     public static void llenarTransportesMaritimos(ArrayList<Maritimo> transportes_maritimos) {
         transportes_maritimos.add(new Maritimo("Barco", "Maritimo", 10000, 100, 10));
         transportes_maritimos.add(new Maritimo("Yate", "Maritimo", 5000, 50, 5));
         transportes_maritimos.add(new Maritimo("Lancha", "Maritimo", 3000, 30, 3));
-
     }
 
     public static void llenarTransportesAereos(ArrayList<Aereo> transportes_aereos) {

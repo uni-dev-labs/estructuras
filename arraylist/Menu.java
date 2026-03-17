@@ -49,7 +49,7 @@ public class Menu {
 
             switch (opcion) {
 
-                // CREAR
+                
                 case 1:
 
                     System.out.print("Nombre: ");
@@ -75,7 +75,7 @@ public class Menu {
                     System.out.println("Transporte creado");
                     break;
 
-                // BUSCAR
+                
                 case 2:
 
                     System.out.print("Nombre a buscar: ");
@@ -103,7 +103,7 @@ public class Menu {
 
                     break;
 
-                // ACTUALIZAR
+                
                 case 3:
 
                     System.out.print("Posicion a actualizar: ");
@@ -138,7 +138,6 @@ public class Menu {
 
                     break;
 
-                // ELIMINAR
                 case 4:
 
                     System.out.print("Posicion a eliminar: ");
@@ -155,7 +154,7 @@ public class Menu {
 
                     break;
 
-                // MOSTRAR
+                
                 case 5:
 
                     Main.printTransportesTerrestres(terrestres);
