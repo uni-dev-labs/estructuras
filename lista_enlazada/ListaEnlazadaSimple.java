@@ -1,12 +1,13 @@
 package lista_enlazada;
 
-import lista_enlazada.models.Node;
+import lista_enlazada.models.NodeTransaccion;
+import lista_enlazada.models.Transaccion;
 
-//Está compuesta por nodos (`Node`) que guardan: un valor entero y una referencia al siguiente nodo
+//Está compuesta por nodos (`NodeTransaccion`) que guardan: un valor entero y una referencia al siguiente nodo
 //Solo conocemos el primer nodo de la lista (`head`).
 
 public class ListaEnlazadaSimple {
-  private Node head;
+  private NodeTransaccion head;
 
   //Constructor: crea una lista vacía.
   public ListaEnlazadaSimple() {
@@ -22,7 +23,7 @@ public class ListaEnlazadaSimple {
   //Devuelve la cantidad de nodos (tamaño) de la lista.
   public int size() {
     int contador = 0;
-    Node actual = head;
+    NodeTransaccion actual = head;
 
     // Recorremos todos los nodos y contamos
     while (actual != null) {
@@ -35,15 +36,15 @@ public class ListaEnlazadaSimple {
 
 
   // Inserta un nuevo elemento al inicio de la lista.
-  public void insertarAlInicio(int value) {
-    Node nuevo_nodo = new Node(value);
+  public void insertarAlInicio(Transaccion transaccion) {
+    NodeTransaccion nuevo_nodo = new NodeTransaccion(transaccion);
     nuevo_nodo.setNext(head); // El nuevo nodo apunta al que antes era el primero
     head = nuevo_nodo; // Ahora el nuevo nodo es la cabeza de la lista
   }
 
   // Inserta un nuevo elemento al final de la lista.
-  public void insertarAlFinal(int value) {
-    Node nuevo_nodo = new Node(value);
+  public void insertarAlFinal(Transaccion transaccion) {
+    NodeTransaccion nuevo_nodo = new NodeTransaccion(transaccion);
 
     // Caso lista vacía: el nuevo nodo es la cabeza
     if (head == null) {
@@ -52,7 +53,7 @@ public class ListaEnlazadaSimple {
     }
 
     // Recorremos hasta el último nodo (aquel cuyo next es null)
-    Node actual = head;
+    NodeTransaccion actual = head;
     while (actual.getNext() != null) {
       actual = actual.getNext();
     }
@@ -69,44 +70,44 @@ public class ListaEnlazadaSimple {
    *
    * Si la posición es inválida (negativa o mayor que size()) se lanza excepción.
    */
-  public void insertarEnPosicion(int value, int posicion) {
+  public void insertarEnPosicion(Transaccion transaccion, int posicion) {
     if (posicion < 0 || posicion > size()) throw new IndexOutOfBoundsException("Posición inválida: " + posicion);
 
     // Insertar al inicio
     if (posicion == 0) {
-      insertarAlInicio(value);
+      insertarAlInicio(transaccion);
       return;
     }
 
     // Recorremos hasta el nodo ANTERIOR a la posición deseada
     int indiceActual = 0;
-    Node nodo_actual = head;
+    NodeTransaccion nodo_actual = head;
     while (indiceActual < posicion - 1) {
       nodo_actual = nodo_actual.getNext();
       indiceActual++;
     }
 
     // `actual` es el nodo previo donde queremos insertar
-    Node nuevo_nodo = new Node(value);
+    NodeTransaccion nuevo_nodo = new NodeTransaccion(transaccion);
     nuevo_nodo.setNext(nodo_actual.getNext()); // el nuevo apunta al que estaba en esa posición
     nodo_actual.setNext(nuevo_nodo);           // el anterior ahora apunta al nuevo
   }
 
   
   //Elimina el primer nodo que tenga el valor indicado. Si el valor no existe, la lista queda igual.
-  public void eliminarPorValor(int value) {
+  public void eliminarPorId(Long idTransaccion) {
     
     if (head == null) return; // Lista vacía: no hay nada que eliminar
     
 
-    if (head.getValue() == value) { // Caso especial: el valor está en la cabeza
+    if (head.getTransaccion().getIdTransaccion() == idTransaccion) { // Caso especial: el valor está en la cabeza
       head = head.getNext(); // "saltamos" el primer nodo
       return;
     }
 
     // Recorremos buscando el nodo ANTERIOR al que tiene el valor
-    Node actual = head;
-    while (actual.getNext() != null && actual.getNext().getValue() != value) {
+    NodeTransaccion actual = head;
+    while (actual.getNext() != null && actual.getNext().getTransaccion().getIdTransaccion() != idTransaccion) {
       actual = actual.getNext();
     }
 
@@ -131,7 +132,7 @@ public class ListaEnlazadaSimple {
 
     // Recorremos hasta el nodo ANTERIOR al que queremos eliminar
     int indiceActual = 0;
-    Node actual = head;
+    NodeTransaccion actual = head;
     while (indiceActual < posicion - 1) {
       actual = actual.getNext();
       indiceActual++;
@@ -151,18 +152,18 @@ public class ListaEnlazadaSimple {
   }
 
   //Devuelve true si la lista contiene el valor indicado.
-  public boolean contiene(int value) {
-    return buscar(value) != -1;
+  public boolean contiene(Long idTransaccion) {
+    return buscar(idTransaccion) != -1;
   }
 
   //Busca la primera ocurrencia de un valor y devuelve su posición. 
   // Si no se encuentra, devuelve -1.
-  public int buscar(int value) {
+  public int buscar(Long idTransaccion) {
     int posicion = 0;
-    Node actual = head;
+    NodeTransaccion actual = head;
 
     while (actual != null) {
-      if (actual.getValue() == value) {
+      if (actual.getTransaccion().getIdTransaccion() == idTransaccion) {
         return posicion;
       }
       actual = actual.getNext();
@@ -174,27 +175,28 @@ public class ListaEnlazadaSimple {
 
   //Devuelve el valor almacenado en la posición indicada. 
   // Si la posición es inválida, se lanza excepción.
-  public int obtenerEnPosicion(int posicion) {
-    if (posicion < 0 || posicion >= size())  throw new IndexOutOfBoundsException("Posición inválida: " + posicion);
+  public Transaccion obtenerEnPosicion(int posicion) {
+    //este if no deberia ir en el menu pare ver si se ejecuta el programa o no
+    if (posicion < 0 || posicion >= size()) throw new IndexOutOfBoundsException("Posición inválida: " + posicion);
 
     int indiceActual = 0;
-    Node actual = head;
+    NodeTransaccion actual = head;
 
     while (indiceActual < posicion) {
       actual = actual.getNext();
       indiceActual++;
     }
 
-    return actual.getValue();
+    return actual.getTransaccion();
   }
 
 
   public void imprimir() {
     System.out.print("[");
 
-    Node actual = head;
+    NodeTransaccion actual = head;
     while (actual != null) {
-      System.out.print(actual.getValue());
+      System.out.print(actual.getTransaccion());
 
       // Si NO es el último, imprimimos la flecha
       if (actual.getNext() != null) {
