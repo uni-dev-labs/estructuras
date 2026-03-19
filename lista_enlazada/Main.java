@@ -5,6 +5,8 @@ public class Main {
         // Creamos una lista vacía
         ListaEnlazadaSimple lista = new ListaEnlazadaSimple();
 
+        Menu.iniciarMenu();
+
         System.out.println("¿Lista vacía? " + lista.estaVacia());
         lista.imprimir();
 
