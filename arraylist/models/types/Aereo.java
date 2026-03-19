@@ -26,4 +26,9 @@ public class Aereo extends Transporte {
     public void setAltura_max(int altura_max) {
         this.altura_max = altura_max;
     }
+
+    public void setAltura(int leerEntero) {
+       
+    }
+    
 }

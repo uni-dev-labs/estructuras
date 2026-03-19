@@ -1,50 +1,100 @@
 package lista_enlazada;
 
+import java.util.Scanner;
+
+
 public class Main {
+
     public static void main(String[] args) {
-        // Creamos una lista vacía
+
+        Scanner leer = new Scanner(System.in);
         ListaEnlazadaSimple lista = new ListaEnlazadaSimple();
 
-        System.out.println("¿Lista vacía? " + lista.estaVacia());
-        lista.imprimir();
+        int opcion;
 
-        // Insertamos algunos elementos
-        lista.insertarAlFinal(10);
-        lista.insertarAlFinal(20);
-        lista.insertarAlFinal(30);
-        lista.insertarAlInicio(5);
-        lista.insertarAlInicio(53);
+        do {
+            System.out.println("\n===== MENÚ =====");
+            System.out.println("1. Insertar al final");
+            System.out.println("2. Insertar al inicio");
+            System.out.println("3. Buscar transacción");
+            System.out.println("4. Eliminar transacción");
+            System.out.println("5. Ver historial");
+            System.out.println("6. Limpiar historial");
+            System.out.println("7. Actualizar transacción");
+            System.out.println("8. Salir");
+            System.out.print("Opción: ");
 
-        System.out.print("Lista después de inserciones: ");
-        lista.imprimir();
-        // System.out.println("Tamaño: " + lista.size());
+            opcion = leer.nextInt();
+            leer.nextLine();
 
-        // Insertar en posición específica
-        lista.insertarEnPosicion(15, 2); // posición 2: 5 -> 10 -> 15 -> 20 -> 30
-        System.out.print("Lista después de insertar 15 en posición 2: ");
-        lista.imprimir();
+            switch (opcion) {
 
-        // Buscar valores
-        System.out.println("Posición del valor 20: " + lista.buscar(20));
-        System.out.println("¿La lista contiene 100? " + lista.contiene(100));
+                case 1:
+                    lista.insertarAlFinal(crearTransaccion(leer));
+                    break;
 
-        // Eliminar por valor
-        lista.eliminarPorValor(10); // elimina el nodo con valor 10
-        System.out.print("Lista después de eliminar el valor 10: ");
-        lista.imprimir();
+                case 2:
+                    lista.insertarAlInicio(crearTransaccion(leer));
+                    break;
 
-        // Eliminar por posición
-        lista.eliminarEnPosicion(0); // elimina la cabeza
-        System.out.print("Lista después de eliminar la posición 0: ");
-        lista.imprimir();
+                case 3:
+                    System.out.print("Descripción a buscar: ");
+                    String buscar = leer.nextLine();
+                    int pos = lista.buscar(buscar);
 
-        // Obtener valor en posición
-        System.out.println("Valor en posición 1: " + lista.obtenerEnPosicion(1));
+                    if (pos != -1) {
+                        System.out.println("Encontrada en posición: " + pos);
+                    } else {
+                        System.out.println("No encontrada.");
+                    }
+                    break;
 
-        // Limpiar lista
-        lista.limpiar();
-        System.out.print("Lista después de limpiar: ");
-        lista.imprimir();
-        System.out.println("¿Lista vacía? " + lista.estaVacia());
+                case 4:
+                    System.out.print("Descripción a eliminar: ");
+                    lista.eliminarPorValor(leer.nextLine());
+                    System.out.println("Proceso realizado.");
+                    break;
+
+                case 5:
+                    lista.imprimir();
+                    break;
+
+                case 6:
+                    lista.limpiar();
+                    System.out.println("Historial eliminado.");
+                    break;
+
+                case 7:
+                    System.out.print("Descripción a actualizar: ");
+                    String desc = leer.nextLine();
+
+                    boolean actualizado = lista.actualizar(desc, crearTransaccion(leer));
+
+                    if (actualizado) {
+                        System.out.println("Transacción actualizada.");
+                    } else {
+                        System.out.println("No se encontró la transacción.");
+                    }
+                    break;
+            }
+
+        } while (opcion != 8);
+
+        System.out.println("Programa terminado.");
+        leer.close();
+    }
+
+    public static Transaccion crearTransaccion(Scanner sc) {
+        System.out.print("Monto: ");
+        double monto = sc.nextDouble();
+        sc.nextLine();
+
+        System.out.print("Descripción: ");
+        String desc = sc.nextLine();
+
+        System.out.print("Fecha (dd/mm/aaaa): ");
+        String fecha = sc.nextLine();
+
+        return new Transaccion(monto, desc, fecha);
     }
 }
