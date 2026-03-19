@@ -1,50 +1,119 @@
 package lista_enlazada;
 
+import java.util.Scanner;
+
 public class Main {
+
     public static void main(String[] args) {
-        // Creamos una lista vacía
+
+        Scanner leer = new Scanner(System.in);
         ListaEnlazadaSimple lista = new ListaEnlazadaSimple();
 
-        System.out.println("¿Lista vacía? " + lista.estaVacia());
-        lista.imprimir();
+        int opcion;
 
-        // Insertamos algunos elementos
-        lista.insertarAlFinal(10);
-        lista.insertarAlFinal(20);
-        lista.insertarAlFinal(30);
-        lista.insertarAlInicio(5);
-        lista.insertarAlInicio(53);
+        do {
+            System.out.println("\n===== MENÚ =====");
+            System.out.println("1. Agregar transacción al final");
+            System.out.println("2. Agregar transacción al inicio");
+            System.out.println("3. Buscar transacción por ID");
+            System.out.println("4. Eliminar transacción por ID");
+            System.out.println("5. Ver historial completo");
+            System.out.println("6. Borrar todo el historial");
+            System.out.println("7. Actualizar transacción por ID");
+            System.out.println("0. Salir del programa");
+            System.out.print("Opción: ");
 
-        System.out.print("Lista después de inserciones: ");
-        lista.imprimir();
-        // System.out.println("Tamaño: " + lista.size());
+            opcion = leer.nextInt();
+            leer.nextLine(); // limpiar buffer
 
-        // Insertar en posición específica
-        lista.insertarEnPosicion(15, 2); // posición 2: 5 -> 10 -> 15 -> 20 -> 30
-        System.out.print("Lista después de insertar 15 en posición 2: ");
-        lista.imprimir();
+            switch (opcion) {
 
-        // Buscar valores
-        System.out.println("Posición del valor 20: " + lista.buscar(20));
-        System.out.println("¿La lista contiene 100? " + lista.contiene(100));
+                case 1:
+                    System.out.println("\n--- Agregar al final ---");
+                    lista.insertarAlFinal(crearTransaccion(leer));
+                    System.out.println("Transacción agregada al final.");
+                    break;
 
-        // Eliminar por valor
-        lista.eliminarPorValor(10); // elimina el nodo con valor 10
-        System.out.print("Lista después de eliminar el valor 10: ");
-        lista.imprimir();
+                case 2:
+                    System.out.println("\n--- Agregar al inicio ---");
+                    lista.insertarAlInicio(crearTransaccion(leer));
+                    System.out.println("Transacción agregada al inicio.");
+                    break;
 
-        // Eliminar por posición
-        lista.eliminarEnPosicion(0); // elimina la cabeza
-        System.out.print("Lista después de eliminar la posición 0: ");
-        lista.imprimir();
+                case 3:
+                    System.out.print("Ingrese el ID a buscar: ");
+                    int idBuscar = leer.nextInt();
+                    leer.nextLine();
 
-        // Obtener valor en posición
-        System.out.println("Valor en posición 1: " + lista.obtenerEnPosicion(1));
+                    int pos = lista.buscarPorId(idBuscar);
+                    Transaccion t = lista.obtenerPorId(idBuscar);
 
-        // Limpiar lista
-        lista.limpiar();
-        System.out.print("Lista después de limpiar: ");
-        lista.imprimir();
-        System.out.println("¿Lista vacía? " + lista.estaVacia());
+                    if (pos != -1) {
+                        System.out.println("Transacción encontrada en posición: " + pos);
+                        System.out.println(t);
+                    } else {
+                        System.out.println("No se encontró la transacción.");
+                    }
+                    break;
+
+                case 4:
+                    System.out.print("Ingrese el ID a eliminar: ");
+                    int idEliminar = leer.nextInt();
+                    leer.nextLine();
+
+                    lista.eliminarPorId(idEliminar);
+                    System.out.println("Proceso de eliminación realizado.");
+                    break;
+
+                case 5:
+                    lista.imprimir();
+                    break;
+
+                case 6:
+                    lista.limpiar();
+                    System.out.println("Historial eliminado completamente.");
+                    break;
+
+                case 7:
+                    System.out.print("Ingrese el ID de la transacción a actualizar: ");
+                    int idActualizar = leer.nextInt();
+                    leer.nextLine();
+
+                    System.out.println("Ingrese los nuevos datos:");
+                    boolean actualizado = lista.actualizarPorId(idActualizar, crearTransaccion(leer));
+
+                    if (actualizado) {
+                        System.out.println("Transacción actualizada correctamente.");
+                    } else {
+                        System.out.println("No se encontró la transacción.");
+                    }
+                    break;
+
+                case 0:
+                    System.out.println("Saliendo del programa...");
+                    break;
+
+                default:
+                    System.out.println("Opción inválida. Intente nuevamente.");
+            }
+
+        } while (opcion != 0);
+
+        System.out.println("Programa terminado.");
+        leer.close();
+    }
+
+    public static Transaccion crearTransaccion(Scanner sc) {
+        System.out.print("Monto: ");
+        double monto = sc.nextDouble();
+        sc.nextLine();
+
+        System.out.print("Descripción: ");
+        String desc = sc.nextLine();
+
+        System.out.print("Fecha (dd/mm/aaaa): ");
+        String fecha = sc.nextLine();
+
+        return new Transaccion(monto, desc, fecha);
     }
 }
