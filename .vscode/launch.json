@@ -1,0 +1,77 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Current File",
+            "request": "launch",
+            "mainClass": "${file}"
+        },
+        {
+            "type": "java",
+            "name": "Main",
+            "request": "launch",
+            "mainClass": "arraylist.Main",
+            "projectName": "arrays"
+        },
+        {
+            "type": "java",
+            "name": "MainString",
+            "request": "launch",
+            "mainClass": "arraylist.MainString",
+            "projectName": "arrays"
+        },
+        {
+            "type": "java",
+            "name": "ArrayMultidimensonales",
+            "request": "launch",
+            "mainClass": "arrays.ArrayMultidimensonales",
+            "projectName": "arrays"
+        },
+        {
+            "type": "java",
+            "name": "ArrayMultidimensonalesTwo",
+            "request": "launch",
+            "mainClass": "arrays.ArrayMultidimensonalesTwo",
+            "projectName": "arrays"
+        },
+        {
+            "type": "java",
+            "name": "ArrayPersons",
+            "request": "launch",
+            "mainClass": "arrays.ArrayPersons",
+            "projectName": "arrays"
+        },
+        {
+            "type": "java",
+            "name": "ArrayStatics",
+            "request": "launch",
+            "mainClass": "arrays.ArrayStatics",
+            "projectName": "arrays"
+        },
+        {
+            "type": "java",
+            "name": "Ciclos",
+            "request": "launch",
+            "mainClass": "arrays.Ciclos",
+            "projectName": "arrays"
+        },
+        {
+            "type": "java",
+            "name": "Ejercicio",
+            "request": "launch",
+            "mainClass": "arrays.Ejercicio",
+            "projectName": "arrays"
+        },
+        {
+            "type": "java",
+            "name": "arrayToObject",
+            "request": "launch",
+            "mainClass": "arrays.arrayToObject",
+            "projectName": "arrays"
+        }
+    ]
+}
