@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "MenuLinkedList",
+            "request": "launch",
+            "mainClass": "lista_enlazada.entities.MenuLinkedList",
+            "projectName": "arrays"
+        },
+        {
+            "type": "java",
             "name": "Current File",
             "request": "launch",
             "mainClass": "${file}"
