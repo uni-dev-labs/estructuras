@@ -1,6 +1,7 @@
 package lista_enlazada;
 
 import lista_enlazada.models.Node;
+import lista_enlazada.models.Transaccion;
 
 //Está compuesta por nodos (`Node`) que guardan: un valor entero y una referencia al siguiente nodo
 //Solo conocemos el primer nodo de la lista (`head`).
@@ -206,5 +207,4 @@ public class ListaEnlazadaSimple {
 
     System.out.println("]");
   }
-
 }
