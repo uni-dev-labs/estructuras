@@ -21,8 +21,6 @@ public class Main {
         llenarTransportesMaritimos(transportes_maritimos);
         llenarTransportesAereos(transportes_aereos);
 
-        Menu.mostrarMenu(transportes_terrestres, transportes_maritimos, transportes_aereos);
-
         // Imprimir los arrays de transportes
         printTransportesTerrestres(transportes_terrestres);
         printTransportesMaritimos(transportes_maritimos);
