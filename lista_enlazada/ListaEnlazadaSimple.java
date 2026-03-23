@@ -71,7 +71,8 @@ public class ListaEnlazadaSimple {
    * Si la posición es inválida (negativa o mayor que size()) se lanza excepción.
    */
   public void insertarEnPosicion(Transaccion transaccion, int posicion) {
-    if (posicion < 0 || posicion > size()) throw new IndexOutOfBoundsException("Posición inválida: " + posicion);
+    //Validacion fuera del metodo
+    //  if (posicion < 0 || posicion > size()) return;
 
     // Insertar al inicio
     if (posicion == 0) {
@@ -123,7 +124,8 @@ public class ListaEnlazadaSimple {
   // - otra posición -> elimina en medio/final
   // Si la posición es inválida se lanza excepción.
   public void eliminarEnPosicion(int posicion) {
-    if (posicion < 0 || posicion >= size()) throw new IndexOutOfBoundsException("Posición inválida: " + posicion);
+    //Validacion fuera del metodo
+    //if (posicion < 0 || posicion >= size()) throw new IndexOutOfBoundsException("Posición inválida: " + posicion);
     // Caso especial: eliminar la cabeza
     if (posicion == 0) {
       head = head.getNext();
@@ -176,8 +178,8 @@ public class ListaEnlazadaSimple {
   //Devuelve el valor almacenado en la posición indicada. 
   // Si la posición es inválida, se lanza excepción.
   public Transaccion obtenerEnPosicion(int posicion) {
-    //este if no deberia ir en el menu pare ver si se ejecuta el programa o no
-    if (posicion < 0 || posicion >= size()) throw new IndexOutOfBoundsException("Posición inválida: " + posicion);
+    //Validacion fuera del metodo
+    //if (posicion < 0 || posicion >= size()) throw new IndexOutOfBoundsException("Posición inválida: " + posicion);
 
     int indiceActual = 0;
     NodeTransaccion actual = head;

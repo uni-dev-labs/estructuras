@@ -26,35 +26,79 @@ public class Menu {
             System.out.println("8. Eliminar transaccion por posicion");
             System.out.println("9. Eliminar todas las transacciones");
             System.out.println("0. Salir");
-            opt = Integer.parseInt(sc.nextLine());
+            try {
+                opt = Integer.parseInt(sc.nextLine());
+            } catch (Exception e) {
+                System.out.println("Debe colocar un número entero"); 
+                opt = -1;
+            }
             switch (opt) {
                 case 1: 
                     transaccion = pedirDatosTransaccion();
+                    if (transaccion == null) {
+                        System.out.println("No se puede crear una transaccion");
+                        break;
+                    }
                     lista.insertarAlInicio(transaccion);
                     System.out.println("Transaccion insertada");
                     
                     break;
                 case 2: 
                     transaccion = pedirDatosTransaccion();
+                    if (transaccion == null) {
+                        System.out.println("No se puede crear una transaccion");
+                        break;
+                    }
                     lista.insertarAlFinal(transaccion);
                     System.out.println("Transaccion insertada");
                     break;
                 case 3: 
                     System.out.println("Posicion en la que quieres agregar la transaccion");
-                    posicion = Integer.parseInt(sc.nextLine());
+                    try {
+                        //El usuario coloca la posicion humana
+                        //posicion 0 el usuario lo pone como 1
+                        //se hace la correccion aqui para que el resto del sistema funcione 
+                        posicion = Integer.parseInt(sc.nextLine()) - 1; 
+                    } catch (Exception e) {
+                        System.out.println("Debe colocar un número entero");   
+                        break;
+                    }
+                    if(posicion < 0 || posicion > lista.size()){
+                        //Se devuelve posicion humana, entonces se corrije
+                        System.out.println("Posición inválida: " + (posicion + 1));
+                        break;
+                    }
                     transaccion = pedirDatosTransaccion();
+                    if (transaccion == null) {
+                        System.out.println("No se puede crear una transaccion");
+                        break;
+                    }
                     lista.insertarEnPosicion(transaccion, posicion);
                     System.out.println("Transaccion insertada");
                     break;
                 case 4: 
-                    System.out.println("Id transaccion:");
-                    idTransaccion = Long.parseLong(sc.nextLine());
-                    if (!lista.contiene(idTransaccion)) {                           
-                        System.out.println("No existe transaccion con ese id");
+                    if(lista.size() == 0){
+                        System.out.println("No existen transacciones");
                         break;
                     }
+                    System.out.println("Id transaccion:");
+                    try {
+                        idTransaccion = Long.parseLong(sc.nextLine());
+                    } catch (Exception e) {
+                        System.out.println("Debe colocar un número entero para el id");   
+                        break;
+                    }
+                    if (!lista.contiene(idTransaccion)) {                           
+                        System.out.println("No existe transaccion con el id " + idTransaccion);
+                        break;
+                    }
+                    //aqui el programa no devuelve posicion humana, por lo que no se hae correccion
                     posicion = lista.buscar(idTransaccion);
-                    transaccion = lista.obtenerEnPosicion(posicion);            
+                    transaccion = lista.obtenerEnPosicion(posicion);  
+                    if (transaccion == null) {
+                        System.out.println("No se puede crear una transaccion");
+                        break;
+                    }          
                     System.out.println(transaccion);                            
                     break;
                 case 5: 
@@ -63,25 +107,44 @@ public class Menu {
                         break;
                     }
                     System.out.println("Posición transaccion:");
-                    posicion = Integer.parseInt(sc.nextLine());
+                    try {
+                        posicion = Integer.parseInt(sc.nextLine()) - 1;
+                    } catch (Exception e) {
+                        System.out.println("Debe colocar un número entero");   
+                        break;
+                    }
                     if(posicion < 0 || posicion >= lista.size()){
-                        System.out.println("Posición inválida: " + posicion);
+                        System.out.println("Posición inválida: " + (posicion + 1));
                         break;
                     }
                     transaccion = lista.obtenerEnPosicion(posicion);
                     System.out.println(transaccion);
                     break;
                 case 6: 
+                    if(lista.size() == 0){
+                        System.out.println("No existen transacciones");
+                        break;
+                    }
                     lista.imprimir();
                     break;
                 case 7:
+                    if(lista.size() == 0){
+                        System.out.println("No existen transacciones");
+                        break;
+                    }
                     System.out.println("Id transaccion:");
-                    idTransaccion = Long.parseLong(sc.nextLine());
+                    try {
+                        idTransaccion = Long.parseLong(sc.nextLine());
+                    } catch (Exception e) {
+                        System.out.println("Id invalido, debe colocar un número entero para el id");   
+                        break;
+                    }
                     if (!lista.contiene(idTransaccion)) {                           
-                        System.out.println("No existe transaccion con ese id");
+                        System.out.println("No existe transaccion con el id " + idTransaccion);
                         break;
                     }
                     lista.eliminarPorId(idTransaccion);
+                    System.out.println("Transaccion con id " + idTransaccion + " eliminada");
                     break;
                 case 8:
                     if(lista.size() == 0){
@@ -89,12 +152,19 @@ public class Menu {
                         break;
                     }
                     System.out.println("Posición transaccion:");
-                    posicion = Integer.parseInt(sc.nextLine());
+                    try {
+                        posicion = Integer.parseInt(sc.nextLine()) - 1;
+                    } catch (Exception e) {
+                        System.out.println("Posicion invalida, debe colocar un número entero");   
+                        break;
+                    }
                     if(posicion < 0 || posicion >= lista.size()){
-                        System.out.println("Posición inválida: " + posicion);
+                        System.out.println("Posición inválida: " + (posicion + 1));
                         break;
                     }
                     lista.eliminarEnPosicion(posicion);
+                    //se imprime indice humano, se coloca + 1 porque el programa maneja el indice normal
+                    System.out.println("Transaccion en posicion " + (posicion + 1) + " eliminada");
                     break;
                 case 9:
                     lista.limpiar();
@@ -112,10 +182,22 @@ public class Menu {
     }
 
     public Transaccion pedirDatosTransaccion(){
-        System.out.println("Id de la transaccion:");
-        Long idTransaccion = Long.parseLong(sc.nextLine());
-        System.out.println("Valor a transferir:");
-        double value = Double.parseDouble(sc.nextLine());
+        System.out.println("Id de la transaccion (El valor debe ser un número entero):");
+        Long idTransaccion;
+        try {
+            idTransaccion = Long.parseLong(sc.nextLine());
+        } catch (Exception e) {
+            System.out.println("Id invalido, debe ser un número entero");   
+            return null;
+        }
+        System.out.println("Valor a transferir (Debe ser un número):");
+        double value;
+        try {
+            value = Double.parseDouble(sc.nextLine());
+        } catch (Exception e) {
+            System.out.println("Valor invalido, debe ser un número");
+            return null;   
+        }
         System.out.println("Numero de cuenta de salida:");
         String numCuentaSalida = sc.nextLine();
         System.out.println("Numero de cuenta de llegada:");
