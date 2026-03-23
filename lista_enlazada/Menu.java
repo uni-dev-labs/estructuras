@@ -190,6 +190,10 @@ public class Menu {
             System.out.println("Id invalido, debe ser un número entero");   
             return null;
         }
+        if (lista.idExistente(idTransaccion)) {
+            System.out.println("Id existente, por favor coloque un id diferente");
+            return null;
+        }
         System.out.println("Valor a transferir (Debe ser un número):");
         double value;
         try {

@@ -34,6 +34,15 @@ public class ListaEnlazadaSimple {
     return contador;
   }
 
+  public boolean idExistente(Long idTransaccion){
+    NodeTransaccion actual = head;
+    while (actual != null) {
+      if (idTransaccion == actual.getTransaccion().getIdTransaccion()) return true;
+      actual = actual.getNext();
+    }
+    return false;
+  }
+
 
   // Inserta un nuevo elemento al inicio de la lista.
   public void insertarAlInicio(Transaccion transaccion) {
