@@ -1,50 +1,82 @@
 package lista_enlazada;
 
+import lista_enlazada.models.Transaccion;
+
+import java.util.Scanner;
+
 public class Main {
     public static void main(String[] args) {
-        // Creamos una lista vacía
+
+        Scanner sc = new Scanner(System.in);
         ListaEnlazadaSimple lista = new ListaEnlazadaSimple();
 
-        System.out.println("¿Lista vacía? " + lista.estaVacia());
-        lista.imprimir();
+        int opcion;
 
-        // Insertamos algunos elementos
-        lista.insertarAlFinal(10);
-        lista.insertarAlFinal(20);
-        lista.insertarAlFinal(30);
-        lista.insertarAlInicio(5);
-        lista.insertarAlInicio(53);
+        do {
+            System.out.println("\n===== MENÚ CRUD =====");
+            System.out.println("1. Agregar transacción");
+            System.out.println("2. Mostrar transacciones");
+            System.out.println("3. Actualizar transacción");
+            System.out.println("4. Eliminar transacción");
+            System.out.println("5. Salir");
+            System.out.print("Seleccione una opción: ");
 
-        System.out.print("Lista después de inserciones: ");
-        lista.imprimir();
-        // System.out.println("Tamaño: " + lista.size());
+            opcion = sc.nextInt();
 
-        // Insertar en posición específica
-        lista.insertarEnPosicion(15, 2); // posición 2: 5 -> 10 -> 15 -> 20 -> 30
-        System.out.print("Lista después de insertar 15 en posición 2: ");
-        lista.imprimir();
+            switch (opcion) {
 
-        // Buscar valores
-        System.out.println("Posición del valor 20: " + lista.buscar(20));
-        System.out.println("¿La lista contiene 100? " + lista.contiene(100));
+                case 1:
+                    System.out.print("Ingrese ID: ");
+                    int id = sc.nextInt();
+                    sc.nextLine();
 
-        // Eliminar por valor
-        lista.eliminarPorValor(10); // elimina el nodo con valor 10
-        System.out.print("Lista después de eliminar el valor 10: ");
-        lista.imprimir();
+                    System.out.print("Ingrese descripción: ");
+                    String desc = sc.nextLine();
 
-        // Eliminar por posición
-        lista.eliminarEnPosicion(0); // elimina la cabeza
-        System.out.print("Lista después de eliminar la posición 0: ");
-        lista.imprimir();
+                    System.out.print("Ingrese monto: ");
+                    double monto = sc.nextDouble();
 
-        // Obtener valor en posición
-        System.out.println("Valor en posición 1: " + lista.obtenerEnPosicion(1));
+                    lista.agregar(new Transaccion(id, desc, monto));
+                    System.out.println("✅ Transacción agregada");
+                    break;
 
-        // Limpiar lista
-        lista.limpiar();
-        System.out.print("Lista después de limpiar: ");
-        lista.imprimir();
-        System.out.println("¿Lista vacía? " + lista.estaVacia());
+                case 2:
+                    System.out.println("\n--- LISTA DE TRANSACCIONES ---");
+                    lista.mostrar();
+                    break;
+
+                case 3:
+                    System.out.print("Ingrese ID a actualizar: ");
+                    int idAct = sc.nextInt();
+                    sc.nextLine();
+
+                    System.out.print("Nueva descripción: ");
+                    String nuevaDesc = sc.nextLine();
+
+                    System.out.print("Nuevo monto: ");
+                    double nuevoMonto = sc.nextDouble();
+
+                    lista.actualizar(idAct, nuevaDesc, nuevoMonto);
+                    break;
+
+                case 4:
+                    System.out.print("Ingrese ID a eliminar: ");
+                    int idElim = sc.nextInt();
+
+                    lista.eliminar(idElim);
+                    System.out.println("🗑️ Transacción eliminada (si existía)");
+                    break;
+
+                case 5:
+                    System.out.println("Saliendo...");
+                    break;
+
+                default:
+                    System.out.println("❌ Opción inválida");
+            }
+
+        } while (opcion != 5);
+
+        sc.close();
     }
 }
