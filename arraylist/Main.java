@@ -2,15 +2,13 @@ package arraylist;
 
 import java.util.ArrayList;
 import java.util.Scanner;
-
 import arraylist.models.Transporte;
 import arraylist.models.types.Aereo;
 import arraylist.models.types.Maritimo;
 import arraylist.models.types.Terrestre;
+import java.util.ArrayList;
 
 public class Main {
-
-   
 
     public static void main(String[] args) {
         // Crear los arrays de transportes
@@ -42,8 +40,10 @@ public class Main {
 
         // Obtener el objeto por nombre
         final Aereo transporte_uno = obtenerObjetoPorNombre("Aereo", transportes_aereos);
-        if (transporte_uno != null)
+
+        if (transporte_uno != null) {
             System.out.println("Transporte terrestre: " + transporte_uno.getNombre());
+        }
 
         // // Modificar el objeto por posición
         ModificarObjetoPorPosicion(2, transportes_aereos, new Aereo("Drone dos . 0", "Aereo", 3000, 30, 3));
@@ -57,12 +57,10 @@ public class Main {
         // transportes.addAll(transportes_terrestres);
         // transportes.addAll(transportes_maritimos);
         // transportes.addAll(transportes_aereos);
-
         // for(Transporte transporte : transportes) {
         // System.out.println("Transporte: " + transporte.getNombre() + " - " +
         // transporte.getMedio());
         // }
-
     }
 
     public static void llenarTransportesTerrestres(ArrayList<Terrestre> transportes_terrestres) {

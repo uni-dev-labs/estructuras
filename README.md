@@ -1,3 +1,3 @@
 # estructuras
 
-este es el proyecto manejado en estructuras de datos
+este es el proyecto manejado en estructuras de datos de tercer semestre
