@@ -1,5 +1,7 @@
 package arraylist;
 
+import java.util.ArrayList;
+import java.util.Scanner;
 import arraylist.models.Transporte;
 import arraylist.models.types.Aereo;
 import arraylist.models.types.Maritimo;
@@ -38,6 +40,7 @@ public class Main {
 
         // Obtener el objeto por nombre
         final Aereo transporte_uno = obtenerObjetoPorNombre("Aereo", transportes_aereos);
+
         if (transporte_uno != null) {
             System.out.println("Transporte terrestre: " + transporte_uno.getNombre());
         }
@@ -55,7 +58,8 @@ public class Main {
         // transportes.addAll(transportes_maritimos);
         // transportes.addAll(transportes_aereos);
         // for(Transporte transporte : transportes) {
-        //     System.out.println("Transporte: " + transporte.getNombre() + " - " + transporte.getMedio());
+        // System.out.println("Transporte: " + transporte.getNombre() + " - " +
+        // transporte.getMedio());
         // }
     }
 
@@ -116,7 +120,8 @@ public class Main {
     }
 
     public static <T extends Transporte> void obtenerObjetoPorPosicion(int posicion, ArrayList<T> transportes_type) {
-        System.out.println("Objeto en la posición " + posicion + " la instancia del objeto en memoria: " + transportes_type.get(posicion));
+        System.out.println("Objeto en la posición " + posicion + " la instancia del objeto en memoria: "
+                + transportes_type.get(posicion));
         System.out.println("Objeto en la posición " + posicion + ": " + transportes_type.get(posicion).getCapacidad());
     }
 
@@ -134,7 +139,8 @@ public class Main {
         }
     }
 
-    public static <T extends Transporte> void ModificarObjetoPorPosicion(int posicion, ArrayList<T> transportes_type, T transporte) {
+    public static <T extends Transporte> void ModificarObjetoPorPosicion(int posicion, ArrayList<T> transportes_type,
+            T transporte) {
         System.out.println("Modificando el objeto en la posición " + posicion);
         transportes_type.set(posicion, transporte);
     }
