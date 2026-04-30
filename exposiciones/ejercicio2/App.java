@@ -1,4 +1,4 @@
-package exposiciones;
+package exposiciones.ejercicio2;
 
 public class App {
 
